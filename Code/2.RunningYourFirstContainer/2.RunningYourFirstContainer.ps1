@@ -1,3 +1,11 @@
+## Running your first container
+## https://github.com/dbafromthecold/SqlServerAndContainersGuide/wiki/Running-your-first-container
+
+
+
+## This code will guide you through pulling an image and spinning a container up
+
+
 
 # searching for a sql server image on the docker hub
 docker search mssql
