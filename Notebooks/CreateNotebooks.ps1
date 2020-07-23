@@ -32,7 +32,7 @@ foreach ($page in $wikipages) {
         }
         if ($lasttype -eq $type) {
             Write-Verbose "Set blockcontent"
-            $blockcontent = $blockcontent + $line + "`r"
+            $blockcontent = $blockcontent + "`r" + $line 
         }
         else {   
             $celltype = $vars -ne $type | Out-String 
