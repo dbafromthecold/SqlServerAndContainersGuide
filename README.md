@@ -5,6 +5,6 @@ The code here is to support the wiki at https://github.com/dbafromthecold/SqlSer
 which will take you step-by-step on how to get up and running with SQL Server in a Docker container.
 
 
-Andrew Pruski
-@dbafromthecold
+Andrew Pruski<br>
+@dbafromthecold<br>
 July 2020
