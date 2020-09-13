@@ -1,9 +1,9 @@
-## Persisting Data
+## Persisting Data using Named Volumes
 ## https://github.com/dbafromthecold/SqlServerAndContainersGuide/wiki/Persisting-data
 
 
 
-## This code will show you how to persist a database from one container to another
+## This code will show you how to persist a database from one container to another using named volumes
 
 
 
