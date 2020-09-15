@@ -1,4 +1,4 @@
-## Persisting Data using Named Volumes
+## Persisting Data using Data Volume Containers
 ## https://github.com/dbafromthecold/SqlServerAndContainersGuide/wiki/Persisting-data-using-data-volume-container
 
 
