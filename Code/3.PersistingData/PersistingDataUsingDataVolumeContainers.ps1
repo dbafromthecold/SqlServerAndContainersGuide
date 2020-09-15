@@ -7,10 +7,10 @@
 
 
 # create a container with volumes
-docker container create --name datastore \
---volume /var/opt/sqlserver/data \
---volume /var/opt/sqlserver/log \
---volume /var/opt/sqlserver/backups \
+docker container create --name datastore `
+--volume /var/opt/sqlserver/data `
+--volume /var/opt/sqlserver/log `
+--volume /var/opt/sqlserver/backups `
 ubuntu:18.04
 
 
@@ -26,15 +26,15 @@ docker volume ls
 
 
 # spin up a container with mapping the volumes from the data volume container
-docker container run -d \
---publish 15789:1433 \
---volumes-from datastore \
---env ACCEPT_EULA=Y \
---env SA_PASSWORD=Testing1122 \
---env MSSQL_DATA_DIR=/var/opt/sqlserver/data \
---env MSSQL_LOG_DIR=/var/opt/sqlserver/log \
---env MSSQL_BACKUP_DIR=/var/opt/sqlserver/backup \
---name testcontainer1 \
+docker container run -d `
+--publish 15789:1433 `
+--volumes-from datastore `
+--env ACCEPT_EULA=Y `
+--env SA_PASSWORD=Testing1122 `
+--env MSSQL_DATA_DIR=/var/opt/sqlserver/data `
+--env MSSQL_LOG_DIR=/var/opt/sqlserver/log `
+--env MSSQL_BACKUP_DIR=/var/opt/sqlserver/backup `
+--name testcontainer1 `
 mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-18.04
 
 
@@ -75,15 +75,15 @@ docker volume ls
 
 
 # spin up another container, mapping the volumes again
-docker container run -d \
---publish 15799:1433 \
---volumes-from datastore \
---env ACCEPT_EULA=Y \
---env SA_PASSWORD=Testing1122 \
---env MSSQL_DATA_DIR=/var/opt/sqlserver/data \
---env MSSQL_LOG_DIR=/var/opt/sqlserver/log \
---env MSSQL_BACKUP_DIR=/var/opt/sqlserver/backup \
---name testcontainer2 \
+docker container run -d `
+--publish 15799:1433 `
+--volumes-from datastore `
+--env ACCEPT_EULA=Y `
+--env SA_PASSWORD=Testing1122 `
+--env MSSQL_DATA_DIR=/var/opt/sqlserver/data `
+--env MSSQL_LOG_DIR=/var/opt/sqlserver/log `
+--env MSSQL_BACKUP_DIR=/var/opt/sqlserver/backup `
+--name testcontainer2 `
 mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-18.04
 
 
@@ -99,13 +99,8 @@ docker exec testcontainer2 ls -al /var/opt/sqlserver
 
 
 # manually attach the database
-mssql-cli -S localhost,15799 -U sa -P Testing1122 \
--Q "CREATE DATABASE [testdatabase1]
-    ON PRIMARY
-    (NAME='testdatabase1',FILENAME='/var/opt/sqlserver/data/testdatabase1.mdf')
-    LOG ON
-    (NAME='testdatabase1_log',FILENAME='/var/opt/sqlserver/log/testdatabase1_log.ldf')
-    FOR ATTACH;"
+mssql-cli -S localhost,15799 -U sa -P Testing1122 `
+-Q "CREATE DATABASE [testdatabase1] ON PRIMARY (NAME='testdatabase1',FILENAME='/var/opt/sqlserver/data/testdatabase1.mdf') LOG ON (NAME='testdatabase1_log',FILENAME='/var/opt/sqlserver/log/testdatabase1_log.ldf') FOR ATTACH;"
 
 
 
