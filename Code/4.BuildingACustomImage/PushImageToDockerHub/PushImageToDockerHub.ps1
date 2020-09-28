@@ -7,8 +7,8 @@
 
 
 
-# view the images locally
-    docker image ls
+# view images locally
+docker image ls
 
 
 
