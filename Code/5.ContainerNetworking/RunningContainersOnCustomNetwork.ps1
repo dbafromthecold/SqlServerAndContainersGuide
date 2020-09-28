@@ -45,7 +45,7 @@ docker network inspect sqlserver
 
 # test pinging each container from the other by name 
 docker exec sqlcontainer1 ping sqlcontainer2 -c 4
-docker exec sqlcontainer2 pint sqlcontainer3 -c 4
+docker exec sqlcontainer2 ping sqlcontainer1 -c 4
 
 
 
@@ -63,7 +63,7 @@ docker container ls -a
 
 
 
-# confirm that it is on the default network
+# confirm that it is on the default bridge network
 docker network inspect bridge
 
 

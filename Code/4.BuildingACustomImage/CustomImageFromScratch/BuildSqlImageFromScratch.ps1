@@ -12,6 +12,11 @@ docker build -t customsqlimage1 .
 
 
 
+# confirm the image is there
+docker image ls
+
+
+
 # spin up a container from the image
 docker container run -d `
 --publish 15789:1433 `
