@@ -64,4 +64,4 @@ exit
 
 
 # but we could also run...
-docker exec sqlcontainer1 /bin/bash -c "ls -al /var/opt/mssql/data"
+docker exec sqlcontainer1 ls -al /var/opt/mssql/data
