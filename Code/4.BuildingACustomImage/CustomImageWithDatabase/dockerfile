@@ -1,0 +1,17 @@
+FROM mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-18.04
+
+USER root
+
+RUN mkdir /var/opt/sqlserver
+
+COPY testdatabase.mdf /var/opt/sqlserver
+COPY testdatabase_log.ldf /var/opt/sqlserver
+COPY attach-db.sh /var/opt/sqlserver
+
+RUN chown -R mssql:mssql /var/opt/sqlserver
+
+RUN chmod +x /var/opt/sqlserver/attach-db.sh
+
+USER mssql
+
+CMD /var/opt/sqlserver/attach-db.sh & /opt/mssql/bin/sqlservr
