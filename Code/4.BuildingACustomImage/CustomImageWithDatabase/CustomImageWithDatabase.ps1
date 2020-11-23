@@ -1,9 +1,9 @@
-## Building a custom image
-## https://github.com/dbafromthecold/SqlServerAndContainersGuide/wiki/Building-a-custom-image
+## Building a custom image with a database ready to go
+## https://github.com/dbafromthecold/SqlServerAndContainersGuide/wiki/Custom-SQL-Server-image-with-a-database-ready-to-go
 
 
 
-## This code will guide you through creating a custom SQL Server 2019 container image
+## This code will guide you through creating a custom SQL Server 2019 container image with a database already available in SQL Server
 
 
 
