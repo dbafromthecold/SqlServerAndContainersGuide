@@ -8,7 +8,7 @@
 
 
 # navigate to where the dockerfile is and build the image
-docker image build -t sqlimage1 .
+docker image build -t customsqlimage1 .
 
 
 
@@ -23,7 +23,7 @@ docker container run -d `
 --env ACCEPT_EULA=Y `
 --env MSSQL_SA_PASSWORD=Testing1122 `
 --name sqlcontainer1 `
-sqlimage1
+customsqlimage1
 
 
 
