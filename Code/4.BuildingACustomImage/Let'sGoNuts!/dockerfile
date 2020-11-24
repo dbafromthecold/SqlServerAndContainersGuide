@@ -1,0 +1,49 @@
+FROM ubuntu:18.04
+
+LABEL maintainer="dbafromthecold@gmail.com"
+
+# create mssql user
+RUN useradd -u 10001 mssql
+
+# installing SQL Server
+RUN apt-get update && apt-get install -y wget software-properties-common apt-transport-https
+RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/18.04/mssql-server-2019.list)"
+RUN apt-get update && apt-get install -y mssql-server
+
+# install SQL Server tools
+RUN add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/18.04/prod.list)"
+RUN apt-get update
+RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17 mssql-tools
+
+# creating directories
+RUN mkdir /var/opt/sqlserver
+RUN mkdir /var/opt/sqlserver/data
+RUN mkdir /var/opt/sqlserver/log
+RUN mkdir /var/opt/sqlserver/backups
+
+# copy files into directories
+COPY testdatabase.mdf /var/opt/sqlserver/data
+COPY testdatabase_log.ldf /var/opt/sqlserver/log
+COPY attach-db.sh /var/opt/sqlserver
+
+# set permissions on directories
+RUN chown -R mssql:mssql /var/opt/mssql
+RUN chown -R mssql:mssql /var/opt/sqlserver
+
+# make attach-db.sh script executable
+RUN chmod +x /var/opt/sqlserver/attach-db.sh
+
+# set environment variables
+ENV ACCEPT_EULA="Y"
+ENV MSSQL_PID="Developer"
+ENV MSSQL_AGENT_ENABLED=True
+ENV MSSQL_DATA_DIR=/var/opt/sqlserver/sqldata
+ENV MSSQL_LOG_DIR=/var/opt/sqlserver/sqllog
+ENV MSSQL_BACKUP_DIR=/var/opt/sqlserver/sqlbackups
+
+# switch to mssql user
+USER mssql
+
+# start sql server
+CMD /var/opt/sqlserver/attach-db.sh & /opt/mssql/bin/sqlservr
